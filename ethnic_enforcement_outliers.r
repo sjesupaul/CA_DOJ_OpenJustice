@@ -1,7 +1,7 @@
 
 ## Status, as of June 28, 2016:
 ## - Pretty much done, although I'd like to convert the nested for loop into a window function call.
-## - Would like to add all years and do a final large panel plot that highlights outliers per year.
+## - Would like to create a final large panel plot that highlights outliers per year.
 
 ## Prep the workspace
 library("AzureML")
@@ -11,11 +11,10 @@ ws <- workspace()
 ## Please note: We could automate file name detection/grabbing in a local version of this, but we're
 ## trying to lean on Azure ML's processing power, so we've gotta' work with their obfuscation of
 ## dataset paths.
-file_names <- c("ca_doj_arrests_deidentified_2014_05-07-2016.csv",
-                "ca_doj_arrests_deidentified_2013_05-07-2016.csv",
-                "ca_doj_arrests_deidentified_2012_05-07-2016.csv",
-                "ca_doj_arrests_deidentified_2011_05-07-2016.csv")
-dat_arrests <- do.call(rbind, download.datasets(ws, file_names))
+file_names <- grep("^ca_doj_arrests.*csv", ws$datasets$Name, value = T)
+
+## Subset to only 2005-2014, because our population data only begins in 2005
+dat_arrests <- do.call(rbind, download.datasets(ws, file_names[!grepl("200[0-4]", file_names)]))
 
 ## Remove row names
 row.names(dat_arrests) <- NULL
@@ -55,26 +54,25 @@ tail(cty_ethnic)
 
 ## Panel bar charts: ethnic breakdown of arrests, by county.
 ## Note: this is sheerly by count (not rate).
-plot_ethnic <- ggplot(cty_ethnic, aes(x = race_or_ethnicity, y = total, fill = race_or_ethnicity)) + 
+plot_ethnic <- ggplot(cty_ethnic[cty_ethnic$arrest_year %in% "2014",], aes(x = race_or_ethnicity, y = total, fill = race_or_ethnicity)) + 
                 geom_bar(stat = "identity") + coord_flip() + facet_wrap(~county) +  
                 theme(axis.text.x=element_text(angle=-90,hjust=1,vjust=0.5, size = 8), axis.text.x=element_text(size = 8),
                       legend.position = "none", strip.text=element_text(size = 8), axis.title.x=element_blank(),
                       axis.title.y=element_blank()) +
                 ggtitle("Ethnic Breakdown of Arrest FREQ by County\r
-2011 - 2014")
+2014 Only (test year)")
 
 ## Print plot
 plot_ethnic
 
 ## Stacked bar chart: ethnic breakdown of arrests, stacked between counties.
-## Again, this is before normalizing by ethnic population.
-plot_ethnic2 <- ggplot(cty_ethnic, aes(x = race_or_ethnicity, y = total, fill = county)) + 
+plot_ethnic2 <- ggplot(cty_ethnic[cty_ethnic$arrest_year %in% "2014",], aes(x = race_or_ethnicity, y = total, fill = county)) + 
                 geom_bar(stat = "identity") + coord_flip() + 
                 theme(axis.text.x=element_text(angle=-90,hjust=1,vjust=0.5, size = 8), axis.text.x=element_text(size = 8),
                       strip.text=element_text(size = 8), axis.title.x=element_blank(), axis.title.y=element_blank(),
                       legend.text=element_text(size= 6), legend.key.height=unit(.4, "cm")) +
                 ggtitle("Cumulative Ethnic Breakdown of Arrest Freq by County\r
-2011 - 2014")
+2014 Only (test year)")
 
 ## Print plot
 plot_ethnic2
@@ -106,17 +104,15 @@ unique(dat_pop_jv$race)
 
 ## Join the pop and arrests datasets.
 ## Start by relabeling the 'race' variable in the pop table. Also, until we've bound all years together, 
-## !! Subsetting pop figures to 2011-2014, for now.
 names(dat_pop_jv)[3] <- "race_or_ethnicity"
 names(cty_ethnic)[2] <- "year"
-dat_joined <- right_join(cty_ethnic, dat_pop_jv[dat_pop_jv$year %in% c("2011","2012","2013","2014"),], 
-                         by = c("county","year","race_or_ethnicity"))
+dat_joined <- right_join(cty_ethnic, dat_pop_jv, by = c("county","year","race_or_ethnicity"))
 
 ## Preview to confirm. 
 head(dat_joined[!(dat_joined$county %in% "Alpine" | dat_joined$county %in% "Amador" | dat_joined$county %in% "Yuba"),])
 tail(dat_joined[!(dat_joined$county %in% "Alpine" | dat_joined$county %in% "Amador" | dat_joined$county %in% "Yuba"),])
 
-## !! Let's sub out those counties that aren't represented in the arrests file.
+## Let's sub out those counties that aren't represented in the arrests file.
 dat_joined <- dat_joined[!(dat_joined$county %in% "Alpine" | 
                            dat_joined$county %in% "Amador" |
                            dat_joined$county %in% "Yuba"),]
@@ -124,15 +120,15 @@ dat_joined <- dat_joined[!(dat_joined$county %in% "Alpine" |
 ## Let's remove post-join arrest total NAs from our analysis...for now.
 dat_joined <- dat_joined[!is.na(dat_joined$total),]
 
-## Now, let's try that first panel plot, but normalized by population.
-plot_ethnic_norm <- ggplot(dat_joined[!(dat_joined$race_or_ethnicity %in% "Native American"),], 
+## Now, let's panel plot arrest rates by county.
+plot_ethnic_norm <- ggplot(dat_joined[!(dat_joined$race_or_ethnicity %in% "Native American") & dat_joined$year %in% "2014",], 
                         aes(x = race_or_ethnicity, y = total/population, fill = race_or_ethnicity), na.rm=T) + 
                         geom_bar(stat = "identity") + coord_flip() + facet_wrap(~county) +  
                         theme(axis.text.x=element_text(angle=-90,hjust=1,vjust=0.5, size = 8), axis.text.x=element_text(size = 8),
                         legend.position = "none", strip.text=element_text(size = 8), axis.title.x=element_blank(),
                         axis.title.y=element_blank()) +
                         ggtitle("Ethnic Breakdown of Arrest Rates by County\r
-2011 - 2014")
+-2014 Only-")
 
 ## Print plot
 plot_ethnic_norm
@@ -170,8 +166,10 @@ for(i in unique(dat_joined$year)){
     }
 }
 
-## Now, show me those who have evidently been outliers in enforcement upon any ethnic group for any year.
-dat_stats[dat_stats$z_score >= 1.5,]
+## Now, preview those who have evidently been outliers in enforcement upon any ethnic group for any year.
+head(dat_stats[dat_stats$z_score >= 2,], 20)
+head(dat_stats[dat_stats$z_score >= 2,], 20)
+paste("Number of outlying instances over this time-span:", nrow(dat_stats[dat_stats$z_score >= 2,]))
 
 ## Interesting. There seem to be a lot of the same few counties represented.
 ## Thus, let's draw up a frequency table of the instances per outlying county from above.
@@ -239,11 +237,15 @@ qqnorm(dat_stats_test$eth_arrest_rate, main = "Arrest Rate Observations for Hisp
 vs. Theoretical Normal Quantiles (outliers included)")
 qqline(dat_stats_test$eth_arrest_rate)
 
-## Save full stats df to csv
-write.csv(dat_stats, "dat_stats_2011-2014.csv", row.names = F)
+## Save full stats df to csv and also upload DF to Azure ML
+write.csv(dat_stats, "dat_stats_2005-2014.csv", row.names = F)
+upload.dataset(dat_stats, ws, name = "dat_stats_2005-2014")
 
-## Save outliers only to csv
-write.csv(dat_stats[dat_stats$z_score > 2,], "dat_stats_outliers_2011-2014.csv", row.names = F)
+## Save outliers-only to csv and also upload DF to Azure ML
+write.csv(dat_stats[dat_stats$z_score > 2,], "dat_stats_outliers_2005-2014.csv", row.names = F)
+upload.dataset(dat_stats[dat_stats$z_score > 2,], ws, name = "dat_stats_outliers_2005-2014")
 
-## Next step: Add all years' datasets and maybe create a large panel plot, faceted by year, between 
-## counties and their per-race/ethnic group arrest rates.
+## ^Please disregard the Azure ML upload status messages the system produces...
+
+## Next step: Create a large panel plot, faceted by year, between counties and their per-race/ethnic
+## group arrest rates OR a motion chart (ala Hans Rosling), which displays the same, over the years.

@@ -1,0 +1,80 @@
+"county","year","race_or_ethnicity","total","gender","age_group","population","eth_arrest_rate","rate_prob","z_score"
+"Kings",2005,"Hispanic",1075,"All Combined","Juvenile",23908,0.04496,0.00241,2.81882359214859
+"Santa Clara",2005,"Hispanic",5917,"All Combined","Juvenile",148781,0.03977,0.01031,2.31487086968197
+"Marin",2005,"Black",230,"All Combined","Juvenile",1194,0.19263,0.00026,3.47023664523664
+"Kings",2005,"White",607,"All Combined","Juvenile",12285,0.04941,0.00014,3.63313355094725
+"San Joaquin",2005,"Asian/Pacific Islander",637,"All Combined","Juvenile",26484,0.02405,0.01557,2.15527910358513
+"Tulare",2005,"Asian/Pacific Islander",108,"All Combined","Juvenile",3936,0.02744,0.00373,2.67558029977387
+"Kings",2005,"Other",76,"All Combined","Juvenile",1352,0.05621,0.00388,2.66233762207337
+"San Francisco",2005,"Other",495,"All Combined","Juvenile",6834,0.07243,0.00012,3.67270125665706
+"Kings",2006,"Hispanic",1103,"All Combined","Juvenile",24535,0.04496,0.00769,2.42330518526726
+"Marin",2006,"Hispanic",412,"All Combined","Juvenile",10185,0.04045,0.02141,2.02546147983881
+"Marin",2006,"Black",270,"All Combined","Juvenile",1172,0.23038,0.00016,3.59854702071633
+"Kings",2006,"White",576,"All Combined","Juvenile",12124,0.04751,0.00029,3.4407986345584
+"Solano",2006,"White",1274,"All Combined","Juvenile",35915,0.03547,0.01605,2.14316315136987
+"San Joaquin",2006,"Asian/Pacific Islander",644,"All Combined","Juvenile",26960,0.02389,0.00325,2.72143076148236
+"San Francisco",2006,"Other",539,"All Combined","Juvenile",7070,0.07624,0,Inf
+"Marin",2007,"Hispanic",527,"All Combined","Juvenile",10420,0.05058,0.00375,2.67378731547291
+"Santa Clara",2007,"Hispanic",7294,"All Combined","Juvenile",152722,0.04776,0.00734,2.44017865423393
+"Marin",2007,"Black",244,"All Combined","Juvenile",1146,0.21291,0.00016,3.59854702071633
+"Kings",2007,"White",519,"All Combined","Juvenile",11948,0.04344,0.00079,3.15957394676807
+"San Joaquin",2007,"Asian/Pacific Islander",552,"All Combined","Juvenile",27420,0.02013,0.01349,2.21180704692112
+"Tulare",2007,"Asian/Pacific Islander",93,"All Combined","Juvenile",3933,0.02365,0.0019,2.89430405305143
+"San Francisco",2007,"Other",513,"All Combined","Juvenile",7263,0.07063,0,Inf
+"Marin",2008,"Hispanic",602,"All Combined","Juvenile",10649,0.05653,7e-04,3.19465105376329
+"Santa Clara",2008,"Hispanic",7061,"All Combined","Juvenile",155339,0.04546,0.01199,2.25744952630549
+"Marin",2008,"Black",219,"All Combined","Juvenile",1130,0.19381,0.00101,3.08727592415139
+"Shasta",2008,"Black",72,"All Combined","Juvenile",466,0.15451,0.0219,2.01599976847751
+"Kings",2008,"White",500,"All Combined","Juvenile",11648,0.04293,0.00087,3.13135784682923
+"Shasta",2008,"Asian/Pacific Islander",22,"All Combined","Juvenile",1209,0.0182,0.01161,2.26979539688064
+"San Francisco",2008,"Other",597,"All Combined","Juvenile",7348,0.08125,0,Inf
+"Marin",2009,"Hispanic",659,"All Combined","Juvenile",10916,0.06037,7e-05,3.80816826444902
+"Santa Clara",2009,"Hispanic",6315,"All Combined","Juvenile",156460,0.04036,0.01885,2.07810162534856
+"Marin",2009,"Black",179,"All Combined","Juvenile",1061,0.16871,0.00757,2.42901274765372
+"Shasta",2009,"Black",88,"All Combined","Juvenile",463,0.19006,0.00142,2.98454545682595
+"Kings",2009,"White",351,"All Combined","Juvenile",11101,0.03162,0.00694,2.46035408529154
+"Sutter",2009,"White",326,"All Combined","Juvenile",10600,0.03075,0.00956,2.34318304647273
+"Kings",2009,"Asian/Pacific Islander",20,"All Combined","Juvenile",1152,0.01736,0.0069,2.4624276813832
+"San Francisco",2009,"Other",582,"All Combined","Juvenile",7716,0.07543,0,Inf
+"Marin",2010,"Hispanic",536,"All Combined","Juvenile",11434,0.04688,0.00094,3.10856230817968
+"Santa Clara",2010,"Hispanic",6653,"All Combined","Juvenile",157119,0.04234,0.00383,2.66670006303407
+"Marin",2010,"Black",200,"All Combined","Juvenile",1107,0.18067,0.00412,2.6420742069009
+"Shasta",2010,"Black",95,"All Combined","Juvenile",447,0.21253,0.00034,3.39751845977858
+"Kings",2010,"White",356,"All Combined","Juvenile",10748,0.03312,0.00191,2.89265552934594
+"Santa Cruz",2010,"Asian/Pacific Islander",16,"All Combined","Juvenile",1217,0.01315,0.01727,2.11371051345018
+"San Francisco",2010,"Other",478,"All Combined","Juvenile",8199,0.0583,0,Inf
+"Marin",2011,"Hispanic",546,"All Combined","Juvenile",11659,0.04683,6e-05,3.84612614454269
+"Marin",2011,"Black",157,"All Combined","Juvenile",1095,0.14338,0.00383,2.66670006303407
+"Shasta",2011,"Black",63,"All Combined","Juvenile",434,0.14516,0.00322,2.72449451526993
+"Kings",2011,"White",266,"All Combined","Juvenile",9907,0.02685,0.00222,2.84508193855491
+"Kings",2011,"Asian/Pacific Islander",17,"All Combined","Juvenile",1159,0.01467,7e-04,3.19465105376329
+"San Francisco",2011,"Other",426,"All Combined","Juvenile",8722,0.04884,0,Inf
+"Marin",2012,"Hispanic",299,"All Combined","Juvenile",11732,0.02549,0.0068,2.46765849254068
+"Santa Clara",2012,"Hispanic",3689,"All Combined","Juvenile",157088,0.02348,0.016,2.14441062091184
+"Kings",2012,"Black",187,"All Combined","Juvenile",1451,0.12888,0.01754,2.10743373484453
+"Marin",2012,"Black",154,"All Combined","Juvenile",1034,0.14894,0.00359,2.68837831262013
+"Shasta",2012,"Black",60,"All Combined","Juvenile",428,0.14019,0.00745,2.43480055264006
+"Kings",2012,"White",237,"All Combined","Juvenile",9162,0.02587,0.0019,2.89430405305143
+"San Joaquin",2012,"White",1118,"All Combined","Juvenile",45239,0.02471,0.00346,2.70066981625568
+"Sutter",2012,"White",209,"All Combined","Juvenile",9977,0.02095,0.01915,2.07162957094499
+"Shasta",2012,"Asian/Pacific Islander",17,"All Combined","Juvenile",1157,0.01469,0.00058,3.24853729776867
+"Kern",2012,"Other",274,"All Combined","Juvenile",6743,0.04063,8e-05,3.77501193935636
+"San Francisco",2012,"Other",348,"All Combined","Juvenile",9251,0.03762,3e-04,3.43161440362327
+"Kings",2013,"Hispanic",644,"All Combined","Juvenile",26441,0.02436,0.00188,2.89762489133379
+"Santa Clara",2013,"Hispanic",3081,"All Combined","Juvenile",156824,0.01965,0.02134,2.02682805751298
+"Shasta",2013,"Black",59,"All Combined","Juvenile",408,0.14461,0.00024,3.49167606340396
+"Kings",2013,"White",201,"All Combined","Juvenile",8790,0.02287,0.00166,2.9364428391618
+"Sutter",2013,"White",223,"All Combined","Juvenile",9785,0.02279,0.00175,2.92002794436202
+"Kings",2013,"Asian/Pacific Islander",17,"All Combined","Juvenile",1018,0.0167,0.00014,3.63313355094725
+"San Luis Obispo",2013,"Asian/Pacific Islander",18,"All Combined","Juvenile",1284,0.01402,0.0021,2.8627362635059
+"Kern",2013,"Other",216,"All Combined","Juvenile",6844,0.03156,0.00012,3.67270125665706
+"San Francisco",2013,"Other",307,"All Combined","Juvenile",9862,0.03113,0.00015,3.61530000692466
+"Kings",2014,"Hispanic",589,"All Combined","Juvenile",26733,0.02203,0.0022,2.84796328748792
+"Marin",2014,"Hispanic",231,"All Combined","Juvenile",12182,0.01896,0.01273,2.23435080374651
+"Shasta",2014,"Black",58,"All Combined","Juvenile",404,0.14356,4e-05,3.94440008415945
+"Kings",2014,"White",209,"All Combined","Juvenile",8628,0.02422,6e-05,3.84612614454269
+"Sutter",2014,"White",157,"All Combined","Juvenile",9594,0.01636,0.01541,2.15938900734082
+"Kings",2014,"Asian/Pacific Islander",45,"All Combined","Juvenile",995,0.04523,0,Inf
+"Kern",2014,"Other",163,"All Combined","Juvenile",7011,0.02325,0.00093,3.1117213089817
+"Kings",2014,"Other",33,"All Combined","Juvenile",1723,0.01915,0.00795,2.41120290497433
+"San Francisco",2014,"Other",257,"All Combined","Juvenile",10500,0.02448,0.00044,3.32632265009457
