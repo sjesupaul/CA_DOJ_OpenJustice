@@ -149,10 +149,10 @@ for(i in unique(dat_joined$year)){
         
         ## Compute the probability of the observed arrest rate
         dat_race$rate_prob <- round(pnorm(dat_race$eth_arrest_rate, mean(dat_race$eth_arrest_rate, na.rm = T), 
-                                    sd(dat_race$eth_arrest_rate, na.rm = T), lower.tail = FALSE, log.p = FALSE), 5)
+                                    sd(dat_race$eth_arrest_rate, na.rm = T), lower.tail = T, log.p = F), 5)
         
         ## Compute the Z-score of the observed arrest rates
-        dat_race$z_score <- qnorm(dat_race$rate_prob, lower.tail = FALSE, log.p = FALSE)
+        dat_race$z_score <- qnorm(dat_race$rate_prob, lower.tail = T, log.p = F)
         
         ## Bind to burgeoning dataframe
         dat_stats <- rbind(dat_stats, dat_race)
@@ -160,18 +160,24 @@ for(i in unique(dat_joined$year)){
 }
 
 ## Now, preview those who have evidently been outliers in enforcement upon every ethnic group per every year.
-paste("Number of outlying instances over this time-span:", nrow(dat_stats[dat_stats$z_score >= 2,]))
-head(dat_stats[dat_stats$z_score >= 2,], 20)
-head(dat_stats[dat_stats$z_score >= 2,], 20)
+paste("Number of outlying instances over this time-span:", nrow(dat_stats[dat_stats$z_score >= 3,]))
+head(dat_stats[dat_stats$z_score >= 3,], 20)
+head(dat_stats[dat_stats$z_score >= 3,], 20)
 
 ## Draw up a frequency table of the instances per outlying county from above.
-table(dat_stats[dat_stats$z_score >= 2, "county"])
-
-## Isolate Kings cases to see if there's a pattern.
-dat_stats[dat_stats$z_score >= 2 & dat_stats$county %in% "Kings",]
+table(dat_stats[dat_stats$z_score >= 3, "county"])
 
 ## Let's isolate those SF cases to see if there's a pattern there.
-dat_stats[dat_stats$z_score >= 2 & dat_stats$county %in% "San Francisco",]
+dat_stats[dat_stats$z_score >= 3 & dat_stats$county %in% "San Francisco",]
+
+## Isolate Kings cases to see if there's a pattern.
+dat_stats[dat_stats$z_score >= 3 & dat_stats$county %in% "Kings",]
+
+## Isolate Kings cases to see if there's a pattern at just 2 SDs from the mean.
+dat_stats[dat_stats$z_score >= 2& dat_stats$county %in% "Kings",]
+
+## Isolate Marin cases to see if there's a pattern.
+dat_stats[dat_stats$z_score >= 3 & dat_stats$county %in% "Marin",]
 
 ## Choose a test subset
 dat_stats_test <- dat_stats[dat_stats$year %in% "2014" & dat_stats$race_or_ethnicity %in% "Hispanic",]
@@ -180,14 +186,10 @@ dat_stats_test <- dat_stats[dat_stats$year %in% "2014" & dat_stats$race_or_ethni
 ## If difference's p is < .05, then the observed distribution is not sufficiently normal.
 shapiro.test(dat_stats_test$eth_arrest_rate)
 
-## See what happens if we exclude the outliers. Depending on the number of outliers, this should
-## be even closer to normal.
-shapiro.test(dat_stats_test$eth_arrest_rate[dat_stats_test$z_score < 2])
-
 ## Plot the density w/outliers
 plot(density(dat_stats_test$eth_arrest_rate), 
      main = "Arrest Rate Density for Hispanics in 2014\r
-(test eth and year), With Outliers")
+(test ethnicity and year), With Outliers")
 
 ## Plot vs. purely normal distribution
 qqnorm(dat_stats_test$eth_arrest_rate, main = "Arrest Rate Observations for Hispanics in 2014\r
