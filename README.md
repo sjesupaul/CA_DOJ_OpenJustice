@@ -24,7 +24,7 @@ Responsible DSWG Members:
     - Extending analysis to each ethnic group represented
     - Drilling down to felonies vs. misdemeanors
     
-2. Is the arrest rate of any particular ethnic juvenile group statistically significantly different from that of the remainder, statewide? Are particular groups more likely to be convicted for the same crime?
+2. For the same criminal offense, are particular ethnic juvenile groups more likely to be treated with harsher consequences by law enforcement?
 
 3. Statewide, what contextual and ethnic factors best predict the arrest of juveniles for felonies?
 
